@@ -4,18 +4,15 @@
 class Uploaderurl < Formula
   desc "Script to generate a pre-signed S3 URL for customers to upload log files and diagnostic evidence."
   homepage ""
-  url "https://github.com/GilbertStawny/uploaderURL/archive/refs/tags/v0.1.0.tar.gz"
+  url "https://github.com/GilbertStawny/uploaderURL/archive/refs/tags/v0.1.0.tar.gz", :using => GitHubPrivateRepositoryReleaseDownloadStrategy
   sha256 "f027d49be015bd31565fbe48be6cc3324134d06f1d6c0bd567035162bd844e9f"
   license "GPL-3.0"
-
+  
+  depends_on "boto3" => :python
   # depends_on "cmake" => :build
 
   def install
-    # ENV.deparallelize  # if your formula fails when building in parallel
-    # Remove unrecognized options if warned by configure
-    # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
-    system "./configure", *std_configure_args, "--disable-silent-rules"
-    # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    bin.install "uploadurl"
   end
 
   test do
